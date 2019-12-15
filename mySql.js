@@ -1,48 +1,57 @@
-class MySQL {
+CREATE DATABASE employee_db;
 
-    dropEmployeeTable() {
-        return `DROP TABLE IF EXISTS employee`;
-    }
+USE employee_db;
 
-    dropDepartmentTable() {
-        return `DROP TABLE IF EXISTS department`;
-    }
-
-    dropRoleTable() {
-        return `DROP TABLE IF EXISTS role`;
-    }
-
-    createDepartmentTable() {
-        return `CREATE TABLE IF NOT EXISTS department(
+CREATE TABLE department
+    (
         id INT AUTO_INCREMENT,
-        name VARCHAR(30) NOT NULL,
+        dept VARCHAR(30) NOT NULL,
         PRIMARY KEY(id)
-      );`
-    }
+    );
 
-    createRoleTable() {
-        return `CREATE TABLE IF NOT EXISTS role(
+CREATE TABLE role
+    (
         id INT AUTO_INCREMENT,
         title VARCHAR(30) NOT NULL,
-        salary DECIMAL NOT NULL,
+        salary DECIMAL(10, 2) NOT NULL,
         department_id INT NOT NULL,
         PRIMARY KEY(id),
-        FOREIGN KEY(department_id) REFERENCES department(id)
-      );`
-    }
+        REFERENCES department(id)
+    );
 
-    createEmployeeTable() {
-        return `CREATE TABLE IF NOT EXISTS employee(
+CREATE TABLE employee
+    (
         id INT AUTO_INCREMENT,
         first_name VARCHAR(30) NOT NULL,
         last_name VARCHAR(30) NOT NULL,
         role_id INT NOT NULL,
         manager_id INT,
         PRIMARY KEY(id),
-        FOREIGN KEY(role_id) REFERENCES role(id),
-        FOREIGN KEY(manager_id) REFERENCES employee(id)
-      );`
-    }
-}
+        REFERENCES role(id),
+        REFERENCES employee(id)
+    );
 
-module.exports = MySQL;
+INSERT INTO department(dept) VALUES("Account Management");
+INSERT INTO department(dept) VALUES("Loss Mitigation");
+INSERT INTO department(dept) VALUES("Compliance");
+INSERT INTO department(dept) VALUES("App Dev");
+
+INSERT INTO role(title, salary, department_id) VALUES("Account Manager", 60000, 1);
+INSERT INTO role(title, salary, department_id) VALUES("AVP", 80000, 1);
+INSERT INTO role(title, salary, department_id) VALUES("Underwriter", 70000, 2);
+INSERT INTO role(title, salary, department_id) VALUES("VP", 100000, 2);
+INSERT INTO role(title, salary, department_id) VALUES("QA Specialist", 50000, 3);
+INSERT INTO role(title, salary, department_id) VALUES("SQL Developer", 120000, 4);
+
+
+INSERT INTO employee(first_name, last_name, role_id) VALUES("Palikan", "James", 1);
+INSERT INTO employee(first_name, last_name, role_id) VALUES("Zaprowski", "Justin", 1);
+INSERT INTO employee(first_name, last_name, role_id) VALUES("Little", "Tamara", 2);
+INSERT INTO employee(first_name, last_name, role_id) VALUES("Donovan", "Matthew", 2);
+INSERT INTO employee(first_name, last_name, role_id) VALUES("Leasure", "Greg", 3);
+INSERT INTO employee(first_name, last_name, role_id) VALUES("Pataky", "Gabriel", 4);
+
+
+
+
+
