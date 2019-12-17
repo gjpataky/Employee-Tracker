@@ -61,16 +61,17 @@ function addDepartment() {
     inquirer
         .prompt([
             {
-                name: "name",
+                department: "name",
                 type: "input",
-                message: "What is the department name?"
+                message: "What is the department name?",
+                choices: ["Account Management", "Loss Mitigation", "Compliance", "App Dev"],
             }
         ])
         .then(function (answer) {
             connection.query(
                 "INSERT INTO department SET ?",
                 {
-                    dept_name: answer.name
+                    dept_name: answer.department
                 },
                 function (err) {
                     if (err) throw err;
@@ -87,8 +88,8 @@ function addRole() {
             {
                 name: "title",
                 type: "input",
-                message: "What is the the new role?"
-          choices: [Account Manager]
+                message: "What is the the new role?",
+                choices: ["Account Manager", "AVP", "Underwriter", "BAT Processor", "VP", "QA Specialist", "SQL Developer"],
             }
         ])
         .then(function (answer) {
@@ -102,6 +103,9 @@ function addRole() {
                 /*How do I get the AVP to associate with multiple departments?*/
             }
             if ((answer.dept = "Underwriting")) {
+                dept_id = 2;
+            }
+            if ((answer.dept = "BAT Processor")) {
                 dept_id = 2;
             }
             if ((answer.dept = "VP")) {
@@ -157,7 +161,7 @@ function addEmployee() {
             search();
         }
     );
-});
+};
 
 // View adepartment
 function viewDepartments() {
