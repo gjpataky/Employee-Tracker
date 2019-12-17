@@ -105,9 +105,6 @@ function addRole() {
             if ((answer.dept = "Underwriting")) {
                 dept_id = 2;
             }
-            if ((answer.dept = "BAT Processor")) {
-                dept_id = 2;
-            }
             if ((answer.dept = "VP")) {
                 dept_id = 2;
             }
@@ -200,3 +197,75 @@ function viewEmployees() {
 }
 
 // Update employee roles
+function updateEmployeeRole() {
+    connection.query("SELECT * FROM employee", function (err, results) {
+        if (err) throw err;
+
+        inquirer
+            .prompt([
+                {
+                    name: "employee",
+                    type: "list",
+                    choices: function () {
+                        var choiceArray = [];
+                        for (var i = 0; i < results.length; i++) {
+                            choiceArray.push(results[i].first_name + results[i].last_name);
+                        }
+                        return choiceArray;
+                    },
+                    message: "Employee name"
+                },
+                {
+                    name: "role",
+                    type: "list",
+                    choices: [
+                        "Account Executive",
+                        "AVP",
+                        "Underwriter",
+                        "VP",
+                        "QA Specialist",
+                        "SQL Developer"
+                    ],
+                    message: "Role"
+                }
+            ])
+            .then(function (answer) {
+                var roleID = null;
+                // Why is the above not defined?
+
+                if ((answer.role = "Account Manager")) {
+                    roleID = 1;
+                }
+                if ((answer.role = "AVP")) {
+                    roleId = 1;
+                }
+                if ((answer.role = "Underwriter")) {
+                    roleId = 2;
+                }
+                if ((answer.role = "VP")) {
+                    roleId = 2;
+                }
+                if ((answer.role = "QA Specialist")) {
+                    roleId = 3;
+                }
+                if ((answer.role = "SQL Developer")) {
+                    roleId = 4;
+                }
+                connection.query(
+                    "INSERT INTO employee SET ?",
+
+                    {
+                        first_name: answer.first_name,
+                        last_name: answer.last_name,
+                        role_id: roleId,
+                    },
+
+                    function (err) {
+                        if (err) throw err;
+                        console.log("Updated Employee");
+                        search();
+                    }
+                );
+            });
+    });
+}
