@@ -45,16 +45,16 @@ function search() {
                 addRole();
             } else if (answer.action === 'Add an employee') {
                 addEmployee();
-                if (answer.action === 'View all departments') {
-                    viewDepartments();
-                } else if (answer.action === 'View all roles') {
-                    viewRoles();
-                } else if (answer.action === 'View all employees') {
-                    viewEmployees();
-                } else if (answer.action === 'Update employee role') {
-                    updateRole();
-                }
-            })
+            } if (answer.action === 'View all departments') {
+                viewDepartments();
+            } else if (answer.action === 'View all roles') {
+                viewRoles();
+            } else if (answer.action === 'View all employees') {
+                viewEmployees();
+            } else if (answer.action === 'Update employee role') {
+                updateRole();
+            }
+        })
 }
 // Add a department
 function addDepartment() {
