@@ -30,31 +30,24 @@ CREATE TABLE departments
         CREATE TABLE employees
         (
             id INT
-            AUTO_INCREMENT,
-        first_name VARCHAR
+            UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  first_name VARCHAR
             (30) NOT NULL,
-        last_name VARCHAR
+  last_name VARCHAR
             (30) NOT NULL,
-        role_id INT NOT NULL,
-        manager_id INT,
-        PRIMARY KEY
-            (id),
-        REFERENCES roles
-            (id),
-        REFERENCES employee
-            (id)
+  role_id INT UNSIGNED NOT NULL,
     );
 
-            INSERT INTO department
+            INSERT INTO departments
                 (dept)
             VALUES("Account Management");
-            INSERT INTO department
+            INSERT INTO departments
                 (dept)
             VALUES("Loss Mitigation");
-            INSERT INTO department
+            INSERT INTO departments
                 (dept)
             VALUES("Compliance");
-            INSERT INTO department
+            INSERT INTO departments
                 (dept)
             VALUES("App Dev");
 

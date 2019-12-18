@@ -178,7 +178,7 @@ function viewRoles() {
     connection.query(query, (err, res) => {
         if (err) throw err;
         for (var i = 0; i < res.length; i++) {
-            console.log(`Role: ${res[i].title}  ||  Salary: $${res[i].salary}`);
+            console.log(`Roles: ${res[i].title}  ||  Salary: $${res[i].salary}`);
         }
         search();
     });
