@@ -52,7 +52,7 @@ function search() {
             } else if (answer.action === 'View all employees') {
                 viewEmployees();
             } else if (answer.action === 'Update employee role') {
-                updateRole();
+                updateEmployeeRole();
             }
         })
 }
@@ -61,7 +61,7 @@ function addDepartment() {
     inquirer
         .prompt([
             {
-                department: "name",
+                name: "name",
                 type: "input",
                 message: "What is the department name?",
                 choices: ["Account Management", "Loss Mitigation", "Compliance", "App Dev"],
@@ -71,7 +71,7 @@ function addDepartment() {
             connection.query(
                 "INSERT INTO department SET ?",
                 {
-                    dept_name: answer.department
+                    dept_name: answer.name
                 },
                 function (err) {
                     if (err) throw err;
@@ -233,22 +233,22 @@ function updateEmployeeRole() {
                 var roleID = null;
                 // Why is the above not defined?
 
-                if ((answer.role = "Account Manager")) {
+                if ((answer.roles = "Account Manager")) {
                     roleID = 1;
                 }
-                if ((answer.role = "AVP")) {
+                if ((answer.roles = "AVP")) {
                     roleId = 1;
                 }
-                if ((answer.role = "Underwriter")) {
+                if ((answer.roles = "Underwriter")) {
                     roleId = 2;
                 }
-                if ((answer.role = "VP")) {
+                if ((answer.roles = "VP")) {
                     roleId = 2;
                 }
-                if ((answer.role = "QA Specialist")) {
+                if ((answer.roles = "QA Specialist")) {
                     roleId = 3;
                 }
-                if ((answer.role = "SQL Developer")) {
+                if ((answer.roles = "SQL Developer")) {
                     roleId = 4;
                 }
                 connection.query(
